@@ -1,0 +1,53 @@
+package Lesson5;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        printReсtangle(getSize());
+    }
+
+    public static int getSize() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Введите высоту квадрата (n): ");
+        if (input.hasNextInt()) {
+            int x = input.nextInt();
+            if (x >= 3) return x;
+            else {
+                System.out.println("Значение меньше 3х не продуктивно (поскольку не отобразимо), рекомендую более 3х...");
+                return getSize();
+            }
+        } else {
+            System.out.println("Ошибка при вводе. Повторите ввод.");
+            return getSize();
+        }
+
+    }
+
+    public static void printLine(int type, int width) {
+        switch (type) {
+            case 1:
+                for (int i = 1; i <= width; i++) System.out.print("=");
+                break;
+
+            case 2:
+                for (int i = 1; i <= width; i++) {
+                    if (i == 1 || i == width) System.out.print("=");
+                    else System.out.print((i % 2 == 0 ? "\\" : "/"));
+                }
+                break;
+            default:
+                System.out.println("Неизвестный тип линии...");
+                break;
+        }
+        System.out.println();
+
+    }
+
+    public static void  printReсtangle(int size){
+        for (int i = 1; i <= size; i++) {
+            if (i == 1 || i == size) printLine(1, size * 2);
+            else printLine(2, size * 2);
+        }
+    }
+}
