@@ -7,7 +7,7 @@ public class Main {
 
         System.out.println("Изменения внесены.....");
 
-        
+
 //        int[] mas = {-2, 3, 8, -11, -4, 6};
 //        System.out.println("Вычислить количество отрицательных чисел в массиве :");
 //        System.out.println(Arrays.toString(mas));
