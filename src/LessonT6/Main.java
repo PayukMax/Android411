@@ -162,24 +162,35 @@ public class Main {
 //        str ="7";
 //        System.out.println("7 > 1 ->"+str.compareTo("5")); // сравниваются н сами символы а из индексы в таблице UTF-8
 
-        System.out.println("Введите текст с пробелами -> ");
-        String text = input.nextLine();
-        String result;
+//        System.out.println("Введите текст с пробелами -> ");
+//        String text = input.nextLine();
+//        String result;
 //        System.out.println(text);
 //        String[] array = text.split(" ");
 
-        System.out.println("Заменяемая строка -> ");
-        String text1 = input.nextLine();
-        System.out.println("Новая строка -> ");
-        String text2 = input.nextLine();
-        if (text.contains(text1))  result = text.replaceAll(text1,text2);
-        System.out.println(result);
+//        System.out.println("Заменяемая строка -> ");
+//        String text1 = input.nextLine();
+//        System.out.println("Новая строка -> ");
+//        String text2 = input.nextLine();
+//        if (text.contains(text1))  result = text.replaceAll(text1,text2);
+//        System.out.println(result);
 
 //        System.out.println(Arrays.toString(array));
 //        String res = String.join("Android",array);
 //        System.out.println(res);
-
-
-
+        String text="";
+        do {
+        System.out.print("Введите строку (пустая строка - окончание работы)-> ");
+        text = input.nextLine();
+        if (text.length()==0) break;
+        String result = text.toLowerCase().replaceAll("\\s","");
+        String result2="";
+//        System.out.println(result);
+        for (int i = 0; i < result.length(); i++) {
+            result2 += result.charAt(result.length()-1-i);
+        }
+        System.out.println(text+": "+(result.equals(result2)? "": "не")+" является палиндромом");
+//        System.out.println(result2);
+        } while (true);
     }
 }
