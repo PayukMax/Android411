@@ -63,11 +63,12 @@ public class Main {
 //
 //                System.out.println(num);
 //                System.out.println(num1);
-        int a=5, b=3, c=7;
-        System.out.println("Сумма = "+(a+b+c));
-        System.out.println("Произведение = "+(a*b*c));
-        System.out.println("Среднее арифметическое = "+((a+b+c)/3.));
-
+//        int a=5, b=3, c=7;
+//        System.out.println("Сумма = "+(a+b+c));
+//        System.out.println("Произведение = "+(a*b*c));
+//        System.out.println("Среднее арифметическое = "+((a+b+c)/3.));
+        int i=0;
+        System.out.println(0.0/0.0+10);
 
     }
 }

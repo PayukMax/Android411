@@ -178,19 +178,109 @@ public class Main {
 //        System.out.println(Arrays.toString(array));
 //        String res = String.join("Android",array);
 //        System.out.println(res);
-        String text="";
-        do {
-        System.out.print("Введите строку (пустая строка - окончание работы)-> ");
-        text = input.nextLine();
-        if (text.length()==0) break;
-        String result = text.toLowerCase().replaceAll("\\s","");
-        String result2="";
-//        System.out.println(result);
-        for (int i = 0; i < result.length(); i++) {
-            result2 += result.charAt(result.length()-1-i);
-        }
-        System.out.println(text+": "+(result.equals(result2)? "": "не")+" является палиндромом");
-//        System.out.println(result2);
-        } while (true);
+
+
+//        // домашняя - порверить введенную строку на палиндром (выполнено 24.11.2024)
+//        String text="";
+//        do {
+//        System.out.print("Введите строку (пустая строка - окончание работы)-> ");
+//        text = input.nextLine();
+//        if (text.length()==0) break;
+//        String result = text.toLowerCase().replaceAll("\\s","");
+//        String result2="";
+////        System.out.println(result);
+//        for (int i = 0; i < result.length(); i++) {
+//            result2 += result.charAt(result.length()-1-i);
+//        }
+//        System.out.println(text+": "+(result.equals(result2)? "": "не")+" является палиндромом");
+////        System.out.println(result2);
+//        } while (true);
+
+        // занятие 30.11.2024
+//        StringBuilder sb = new StringBuilder();
+//        System.out.println(sb.capacity());
+//        System.out.println(sb.length());
+//        System.out.println(sb+"\n");
+//
+//        StringBuilder sb1 = new StringBuilder(1000);
+//        System.out.println(sb1.capacity());
+//        System.out.println(sb1.length());
+//        System.out.println(sb1+"\n");
+//
+//        StringBuilder sb2 = new StringBuilder("Java");
+//        System.out.println(sb2.capacity());
+//        System.out.println(sb2.length());
+//        System.out.println(sb2+"\n");
+//
+//        StringBuilder sb3 = new StringBuilder("String");
+//        System.out.println(sb3.capacity());
+//        System.out.println(sb3.length());
+//        System.out.println(sb3+"\n");
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append('a');
+//        sb.append(true);
+//        sb.append(10); // метод преобразует аргумент к строковому типу и добавляет в sb в конец
+//        sb.insert(5,"!!!"); // вставка в произвольный учксток
+//        sb.insert(sb.length(),"aaa"); // результат аналогичный append, если сделаем с позиции 0 - то добавление в начало
+//        System.out.println(sb);
+//        sb.delete(3,14); // удаляем с позиции до позиции, конечная позиция может выходить за груницу
+//        sb.deleteCharAt(1); // удаляет один символ
+//        sb.append(" Hello world!!!");
+//        sb.replace(9,14,"Java");
+//        System.out.println(sb);
+//        System.out.println(sb.substring(3,8));
+//        sb.reverse(); // разворот строки с последнего до первого
+//        System.out.println(sb);
+//
+//        System.out.println(sb.indexOf("a"));
+//        System.out.println(sb.reverse().indexOf("Java")); // ищем в строке вхождение "Java" и возвращаем позицию на которой оно находится, если не нашли -1
+//        System.out.println(sb.indexOf("a",4)); // поиск фрагмента с позиции
+
+//        StringBuilder sb1 = createStr(5,3);
+//        System.out.println(sb1);
+//
+//        modifyStr(sb1,"=","равно");
+//        modifyStr(sb1,"+", "плюс");
+//        modifyStr(sb1,"-", "минус");
+//        modifyStr(sb1,"*", "умножить");
+//        System.out.println(sb1);
+
+        String str = " Текст с повторяющимися символами   ...";
+        System.out.println("Исходная строка  -\""+str+"\"");
+        System.out.println("Измененная строка - \""+newModifyStr(str)+"\"");
+
+
+
     }
+
+//    public static StringBuilder createStr(int a, int b){
+//        StringBuilder res = new StringBuilder();
+//        res.append(a).append(" + ").append(b).append(" = ").append(a+b).append("\n");
+//        res.append(a).append(" - ").append(b).append(" = ").append(a-b).append("\n");
+//        res.append(a).append(" * ").append(b).append(" = ").append(a*b).append("\n");
+//        return res;
+//    }
+
+//    public static void modifyStr(StringBuilder stByld, String oldStr, String newStr){
+//        int pos;
+//        while ((pos= stByld.indexOf(oldStr)) != -1) {
+//            stByld.replace(pos,pos+1,newStr);
+//
+////            stByld.deleteCharAt(pos);
+////            stByld.insert(pos, newStr);
+//        }
+//        return stByld; // если в описании метода делаем void то можем не нужно делать return, иначе возвращаемое значение StringBuilder вместо void
+//}
+    public static StringBuilder newModifyStr(String str1){
+        str1=str1.replaceAll(" ","");
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < str1.length(); i++) {
+            if(res.indexOf(String.valueOf(str1.charAt(i))) == -1) {
+                res.append(str1.charAt(i));
+            }
+        }
+        return res;
+    }
+
 }

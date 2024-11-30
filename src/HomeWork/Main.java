@@ -1,23 +1,21 @@
 package HomeWork;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String text = "";
-        do {
-            System.out.print("Введите строку (пустая строка - окончание работы)-> ");
-            text = input.nextLine();
-            if (text.isEmpty()) break;
-            String result = text.toLowerCase().replaceAll("\\s", "");
-            String result2 = "";
-            for (int i = 0; i < result.length(); i++) {
-                result2 += result.charAt(result.length() - 1 - i);
-            }
-            System.out.println(text + ": " + (result.equals(result2) ? "" : "не") + " является палиндромом");
-        } while (true);
+        String str = " Текст с повторяющимися символами   ...";
+        System.out.println("Исходная строка  -\"" + str + "\"");
+        System.out.println("Измененная строка - \"" + newModifyStr(str) + "\"");
+    }
 
-        input.close();
+    public static StringBuilder newModifyStr(String str1){
+        str1=str1.replaceAll(" ","");
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < str1.length(); i++) {
+            if(res.indexOf(String.valueOf(str1.charAt(i))) == -1) {
+                res.append(str1.charAt(i));
+            }
+        }
+        return res;
+        
     }
 }
