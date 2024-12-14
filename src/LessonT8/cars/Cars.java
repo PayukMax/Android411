@@ -1,4 +1,5 @@
 package LessonT8.cars;
+
 import java.time.Year;
 
 public class Cars {
@@ -9,7 +10,8 @@ public class Cars {
     private String color;
     private int price;
 
-    public Cars(){}
+    public Cars() {
+    }
 
     public Cars(String model, int year, String brand, int pow, String color, int price) {
         this.model = model;
@@ -32,8 +34,11 @@ public class Cars {
         return year;
     }
 
-    public void setYear(int year) {
-      if (year >= 1886 && year <= Year.now().getValue()) this.year = year;
+    public boolean setYear(int year) {
+        if (year >= 1886 && year <= Year.now().getValue()) {
+            this.year = year;
+            return true;
+        } else return false;
     }
 
     public String getBrand() {
@@ -64,18 +69,21 @@ public class Cars {
         return price;
     }
 
-    public void setPrice(int price) {
-        if(price >= 0) this.price = price;
+    public boolean setPrice(int price) {
+        if (price >= 0) {
+            this.price = price;
+            return true;
+        } else return false;
     }
 
-    public void displayData(){
+    public void displayData() {
         System.out.println("******************* Данные автомобиля *****************");
-        System.out.println("Название модели   : "+this.getModel());
-        System.out.println("Год выпуска       : "+this.getYear());
-        System.out.println("Производитель     : "+this.getBrand());
-        System.out.println("Мощность двигателя: "+this.getPow()+" л.с.");
-        System.out.println("Цвет машины       : "+this.getColor());
-        System.out.println("Цена              : "+this.getPrice());
+        System.out.println("Название модели   : " + this.getModel());
+        System.out.println("Год выпуска       : " + this.getYear());
+        System.out.println("Производитель     : " + this.getBrand());
+        System.out.println("Мощность двигателя: " + this.getPow() + " л.с.");
+        System.out.println("Цвет машины       : " + this.getColor());
+        System.out.println("Цена              : " + this.getPrice());
         System.out.println("=======================================================");
     }
 }
