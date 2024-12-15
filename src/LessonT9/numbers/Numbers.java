@@ -16,4 +16,18 @@ public class Numbers {
         return mn;
     }
 
+    public static double average(int... num) {
+        double res = 0;
+        for (int tmp : num)
+            res += tmp;
+        return res/num.length;
+    }
+
+    public static int factorial(int a) {
+        int res = 1;
+        for (int i = 1; i <= a; i++) res=res*i;
+        return res;
+    }
+
+
 }
