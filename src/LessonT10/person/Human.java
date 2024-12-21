@@ -5,6 +5,12 @@ public class Human {
     private String firstName;
     private int age;
 
+    public Human(Human other){
+        this.lastName = other.lastName;
+        this.firstName = other.firstName;
+        this.age = other.age;
+    }
+
     public Human(String lastName, String firstName, int age) {
         this.lastName = lastName;
         this.firstName = firstName;

@@ -6,6 +6,25 @@ public class Student extends Human{
     private double rating;
     private double attendance;
 
+    public Student(Student other) {
+        super(other.getLastName(), other.getFirstName(), other.getAge());
+//        super(other); // можно сделать так - предок воспримет те параметры которые у него есть и отбросит лишние - которые есть у потомка
+        setSpec(other.spec);
+        setGroup(other.group);
+        setRating(other.rating);
+        setAttendance(other.attendance);
+//        System.out.println("Student copy constructor...");
+    }
+
+    public Student(Human hum, String spec, String group, double rating, double attendance) {
+        super(hum);
+        setSpec(spec);
+        setGroup(group);
+        setRating(rating);
+        setAttendance(attendance);
+//        System.out.println("Student copy constructor...");
+    }
+
     public Student(String lastName, String firstName, int age, String spec, String group, double rating, double attendance) {
         super(lastName, firstName, age);
 //        this.spec = spec;

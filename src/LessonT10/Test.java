@@ -17,7 +17,7 @@ public class Test {
 class Properties {
     int width;
     String color;
-    int id=1;
+    protected int id = 1;
 
     public Properties() {
         System.out.println("Конструктор Properties...");
@@ -37,7 +37,7 @@ class Properties {
 class Line extends Properties {
     double x1, y1;
     double x2, y2;
-    int id=2;
+    int id = 2;
 
     public Line() {
         super(3, "желтенький");
@@ -53,8 +53,8 @@ class Line extends Properties {
         super.show();
     }
 
-    void showId(){
-        System.out.println("Id :"+id+" super.id: "+super.id);
+    void showId() {
+        System.out.println("Id :" + id + " super.id: " + super.id);
     }
 }
 
