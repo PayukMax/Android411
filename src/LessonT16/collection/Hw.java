@@ -10,8 +10,9 @@ public class Hw {
         System.out.println("Список: "+colors);
         System.out.println("\nСписок итераторов в прямом направлении:");
         ListIterator<String> p = colors.listIterator();
-        while(p.hasNext())  System.out.println("Индекс = "+p.nextIndex()+", Элемент = "+p.next());
+//        while(p.hasNext())  System.out.println("Индекс = "+p.nextIndex()+", Элемент = "+p.next());
         System.out.println("\nСписок итераторов в обратном направлении:");
+
         while (p.hasPrevious()) System.out.println("Индекс = "+p.previousIndex()+", Элемент = "+p.previous());
 
     }
