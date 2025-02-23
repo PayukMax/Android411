@@ -27,6 +27,26 @@ public class Controller {
         } else if (answer.equals("2")){
             Collection articles = articleModel.getAllArticles();
             userInterface.showAllArticles(articles);
+        } else if (answer.equals("3")) {
+            String articleTitle = userInterface.getUserArticle();
+            try {
+                Map article = articleModel.getSingleArticles(articleTitle);
+                userInterface.showArticlesInfo(article);
+            } catch (NullPointerException npe){
+                userInterface.showIncorrectTiTleErroe(articleTitle);
+            }
+        } else if (answer.equals("4")){
+            String articleTitle = userInterface.getUserArticle();
+            try {
+               Article title = articleModel.removeArticles(articleTitle);
+               userInterface.removeSingleArticl(articleTitle);
+            } catch (NullPointerException npe){
+                userInterface.showIncorrectTiTleErroe(articleTitle);
+            }
+        } else if (answer.equals("q")) {
+            articleModel.saveData();
+        } else  {
+            userInterface.showIncorrectAnswerError(answer);
         }
     }
 }
