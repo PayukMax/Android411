@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyFirst</string>
+    <string name="hello_world">Hello WWWW!!!</string>
+    <string name="sample_text">Hallo</string>
+    <string name="first_btn">Первая кнопка</string>
+    <string name="second_btn">Вторая кнопка</string>
+</resources>
