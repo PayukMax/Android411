@@ -5,4 +5,12 @@
     <string name="sample_text">Hallo</string>
     <string name="first_btn">Первая кнопка</string>
     <string name="second_btn">Вторая кнопка</string>
+    <string name="txt1_text1">Строка 1 надпись первая</string>
+    <string name="txt1_text2">Строка 1 надпись вторая</string>
+    <string name="txt2_text1">Строка 2 надпись первая</string>
+    <string name="txt2_text2">Строка 2 надпись вторая</string>
+    <string name="btn1_text1">Кнопка 1 надпись 1</string>
+    <string name="btn1_text2">Кнопка 1 надпись 2</string>
+    <string name="btn2_text1">Кнопка 2 надпись 1</string>
+    <string name="btn2_text2">Кнопка 2 надпись 2</string>
 </resources>
