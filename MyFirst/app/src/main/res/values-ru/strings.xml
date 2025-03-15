@@ -13,4 +13,8 @@
     <string name="btn1_text2">Кнопка 1 надпись 2</string>
     <string name="btn2_text1">Кнопка 2 надпись 1</string>
     <string name="btn2_text2">Кнопка 2 надпись 2</string>
+    <string name="logo_text">Калькулятор</string>
+    <string name="number_1">Число 1</string>
+    <string name="number_2">Число 2</string>
+    <string name="sum_btn">Вычислить сумму</string>
 </resources>
