@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResScreen">
+    tools:context=".ResScreen2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         >
 
         <TextView
-            android:id="@+id/messageText"
+            android:id="@+id/messageText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Resault"
@@ -28,7 +28,7 @@
             />
 
         <Button
-            android:id="@+id/startAgainButton"
+            android:id="@+id/startAgainButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Game Again"
@@ -39,4 +39,5 @@
             android:textAllCaps="false"
             />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

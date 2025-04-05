@@ -1,4 +1,4 @@
-package com.example.gamexo;
+package com.example.gamexo_hw;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,29 +14,29 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class ResultDialog extends Dialog {
+public class ResScreen2 extends Dialog {
     private final String message;
-    private final PlayingField playingField;
+    private final PlayField2 playingField2;
 
-    public ResultDialog(@NonNull Context context, String message, PlayingField playingField) {
+    public ResScreen2(@NonNull Context context, String message, PlayField2 playingField2) {
         super(context);
         this.message = message;
-        this.playingField = playingField;
+        this.playingField2 = playingField2;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result_dialog);
+        setContentView(R.layout.activity_res_screen2);
 
-        TextView messageText = findViewById(R.id.messageText);
-        Button startAgainBtn = findViewById(R.id.startAgainButton);
+        TextView messageText = findViewById(R.id.messageText2);
+        Button startAgainBtn = findViewById(R.id.startAgainButton2);
 
         messageText.setText(message);
         startAgainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playingField.restartMatch();
+                playingField2.restartMatch();
                 dismiss();
             }
         });

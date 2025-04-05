@@ -13,6 +13,9 @@
         android:theme="@style/Theme.GameXO_HW"
         tools:targetApi="31">
         <activity
+            android:name=".ResScreen2"
+            android:exported="false" />
+        <activity
             android:name=".PlayField2"
             android:exported="false" />
         <activity
