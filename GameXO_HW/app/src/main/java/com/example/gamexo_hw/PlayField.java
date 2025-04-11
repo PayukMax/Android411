@@ -25,6 +25,8 @@ public class PlayField extends AppCompatActivity {
     private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
     private TextView playerOneName;
     private TextView playerTwoName;
+    private int currentScoreOne = 0;
+    private int currentScoreTwo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +36,14 @@ public class PlayField extends AppCompatActivity {
         playerOneName = findViewById(R.id.playerOneName);
         playerTwoName = findViewById(R.id.playerTwoName);
 
-        combinationList.add(new int[]{0,1,2});
-        combinationList.add(new int[]{3,4,5});
-        combinationList.add(new int[]{6,7,8});
-        combinationList.add(new int[]{0,3,6});
-        combinationList.add(new int[]{1,4,7});
-        combinationList.add(new int[]{2,5,8});
-        combinationList.add(new int[]{0,4,8});
-        combinationList.add(new int[]{2,4,6});
+        combinationList.add(new int[]{0, 1, 2});
+        combinationList.add(new int[]{3, 4, 5});
+        combinationList.add(new int[]{6, 7, 8});
+        combinationList.add(new int[]{0, 3, 6});
+        combinationList.add(new int[]{1, 4, 7});
+        combinationList.add(new int[]{2, 5, 8});
+        combinationList.add(new int[]{0, 4, 8});
+        combinationList.add(new int[]{2, 4, 6});
 
         String getPlayerOneName = getIntent().getStringExtra("playerOne");
         String getPlayerTwoName = getIntent().getStringExtra("playerTwo");
@@ -135,7 +137,6 @@ public class PlayField extends AppCompatActivity {
         });
 
 
-
         a2_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,33 +155,51 @@ public class PlayField extends AppCompatActivity {
         playerOneName = findViewById(R.id.playerOneName);
         playerTwoName = findViewById(R.id.playerTwoName);
 
+        TextView scorePlayOne = findViewById(R.id.scoreOne);
+        TextView scorePlayTwo = findViewById(R.id.scoreTwo);
+
         if (activePlayer == 1) {
             image.setImageResource(R.drawable.ximage_m);
-            if(checkResults()) {
-                ResScreen resultDialog = new ResScreen( PlayField.this, playerOneName.getText().toString()+" is a WINNER!!!", PlayField.this);
+            if (checkResults()) {
+                ResScreen resultDialog = new ResScreen(PlayField.this, playerOneName.getText().toString() + " is a WINNER!!!", PlayField.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
+                currentScoreOne++;
+                scorePlayOne.setText(String.valueOf(currentScoreOne));
+            } else if (totalSelectBoxes == 9) {
+                ResScreen resultDialog = new ResScreen(PlayField.this, "Match Draw!!!", PlayField.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else {
+                totalSelectBoxes++;
+                changePlayerTurn(2);
             }
-            totalSelectBoxes++;
-            changePlayerTurn(2);
+
         } else {
             image.setImageResource(R.drawable.oimage_m);
-            if(checkResults()) {
-                ResScreen resultDialog = new ResScreen( PlayField.this, playerTwoName.getText().toString()+" is a WINNER!!!", PlayField.this);
+            if (checkResults()) {
+                ResScreen resultDialog = new ResScreen(PlayField.this, playerTwoName.getText().toString() + " is a WINNER!!!", PlayField.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
+                currentScoreTwo++;
+                scorePlayTwo.setText(String.valueOf(currentScoreTwo));
+            } else if (totalSelectBoxes == 9) {
+                ResScreen resultDialog = new ResScreen(PlayField.this, "Match Draw!!!", PlayField.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else {
+                totalSelectBoxes++;
+                changePlayerTurn(1);
             }
-            totalSelectBoxes++;
-            changePlayerTurn(1);
-        }
 
+        }
     }
 
-    private boolean checkResults(){
+    private boolean checkResults() {
         boolean responce = false;
         for (int i = 0; i < combinationList.size(); i++) {
-            final  int[] combination = combinationList.get(i);
-            if (boxPositions[combination[0]] == activePlayer && boxPositions[combination[1]]==activePlayer && boxPositions[combination[2]]==activePlayer) {
+            final int[] combination = combinationList.get(i);
+            if (boxPositions[combination[0]] == activePlayer && boxPositions[combination[1]] == activePlayer && boxPositions[combination[2]] == activePlayer) {
                 responce = true;
             }
         }

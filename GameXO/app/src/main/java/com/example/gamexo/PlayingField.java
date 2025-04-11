@@ -24,6 +24,10 @@ public class PlayingField extends AppCompatActivity {
     private TextView playerOneName;
     private TextView playerTwoName;
 
+    private int currentScoreOne = 0;
+    private int currentScoreTwo = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,24 +145,44 @@ public class PlayingField extends AppCompatActivity {
         playerOneName = findViewById(R.id.playerOneName);
         playerTwoName = findViewById(R.id.playerTwoName);
 
+        TextView scorePlayerOne = findViewById(R.id.scoreOne);
+        TextView scorePlayerTwo = findViewById(R.id.scoreTwo);
+
+
+
         if (activePlayer == 1) {
             image.setImageResource(R.drawable.ximage);
             if(checkResults()) {
                 ResultDialog resultDialog = new ResultDialog( PlayingField.this, playerOneName.getText().toString()+" is a WINNER!!!", PlayingField.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
+                currentScoreOne++;
+                scorePlayerOne.setText(String.valueOf(currentScoreOne));
+            } else if(totalSelectBoxes == 9) {
+                ResultDialog resultDialog = new ResultDialog(PlayingField.this, "Match Draw", PlayingField.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            }  else {
+                totalSelectBoxes++;
+                changePlayerTurn(2);
             }
-            totalSelectBoxes++;
-            changePlayerTurn(2);
         } else {
             image.setImageResource(R.drawable.oimage);
             if(checkResults()) {
                 ResultDialog resultDialog = new ResultDialog( PlayingField.this, playerTwoName.getText().toString()+" is a WINNER!!!", PlayingField.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
+                currentScoreTwo++;
+                scorePlayerTwo.setText(String.valueOf(currentScoreTwo));
+            } else if(totalSelectBoxes == 9) {
+                ResultDialog resultDialog = new ResultDialog(PlayingField.this, "Match Draw", PlayingField.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else {
+                totalSelectBoxes++;
+                changePlayerTurn(1);
+
             }
-            totalSelectBoxes++;
-            changePlayerTurn(1);
         }
 
     }

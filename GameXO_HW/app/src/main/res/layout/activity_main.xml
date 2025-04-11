@@ -76,13 +76,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="EASY Game" />
+                android:text="Human-Human game" />
 
             <RadioButton
                 android:id="@+id/rBtn2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="HARD game" />
+                android:text="Human-Phone game" />
         </RadioGroup>
 
         <Button

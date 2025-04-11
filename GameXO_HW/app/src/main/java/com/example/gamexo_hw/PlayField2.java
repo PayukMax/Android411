@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PlayField2 extends AppCompatActivity {
     private final List<int[]> combinationList = new ArrayList<>();
@@ -25,6 +26,8 @@ public class PlayField2 extends AppCompatActivity {
     private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
     private TextView playerOneName;
     private TextView playerTwoName;
+    private int currentScoreOne = 0;
+    private int currentScoreTwo = 0;
 
 
     @Override
@@ -35,14 +38,14 @@ public class PlayField2 extends AppCompatActivity {
         playerOneName = findViewById(R.id.playerOneName);
         playerTwoName = findViewById(R.id.playerTwoName);
 
-        combinationList.add(new int[]{0,1,2});
-        combinationList.add(new int[]{3,4,5});
-        combinationList.add(new int[]{6,7,8});
-        combinationList.add(new int[]{0,3,6});
-        combinationList.add(new int[]{1,4,7});
-        combinationList.add(new int[]{2,5,8});
-        combinationList.add(new int[]{0,4,8});
-        combinationList.add(new int[]{2,4,6});
+        combinationList.add(new int[]{0, 1, 2});
+        combinationList.add(new int[]{3, 4, 5});
+        combinationList.add(new int[]{6, 7, 8});
+        combinationList.add(new int[]{0, 3, 6});
+        combinationList.add(new int[]{1, 4, 7});
+        combinationList.add(new int[]{2, 5, 8});
+        combinationList.add(new int[]{0, 4, 8});
+        combinationList.add(new int[]{2, 4, 6});
 
         String getPlayerOneName = getIntent().getStringExtra("playerOne");
         String getPlayerTwoName = getIntent().getStringExtra("playerTwo");
@@ -135,7 +138,6 @@ public class PlayField2 extends AppCompatActivity {
         });
 
 
-
         Button a3_btn1 = findViewById(R.id.btn_back2);
         a3_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,36 +154,117 @@ public class PlayField2 extends AppCompatActivity {
         image.setBackgroundResource(R.drawable.white_box);
         image.setScaleType(ImageView.ScaleType.CENTER);
 
+
         playerOneName = findViewById(R.id.playerOneName);
         playerTwoName = findViewById(R.id.playerTwoName);
 
+        TextView scorePlayOne = findViewById(R.id.scoreOne);
+        TextView scorePlayTwo = findViewById(R.id.scoreTwo);
+        TextView mess = findViewById(R.id.a2_message);
+
         if (activePlayer == 1) {
             image.setImageResource(R.drawable.ximage_m);
-            if(checkResults()) {
-                ResScreen2 resultDialog = new ResScreen2( PlayField2.this, playerOneName.getText().toString()+" is a WINNER!!!", PlayField2.this);
+            if (checkResults()) {
+                ResScreen2 resultDialog = new ResScreen2(PlayField2.this, playerOneName.getText().toString() + " is a WINNER!!!", PlayField2.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
-            }
-            totalSelectBoxes++;
-            changePlayerTurn(2);
-        } else {
-            image.setImageResource(R.drawable.oimage_m);
-            if(checkResults()) {
-                ResScreen2 resultDialog = new ResScreen2( PlayField2.this, playerTwoName.getText().toString()+" is a WINNER!!!", PlayField2.this);
+                currentScoreOne++;
+                scorePlayOne.setText(String.valueOf(currentScoreOne));
+            } else if (totalSelectBoxes == 9) {
+                ResScreen2 resultDialog = new ResScreen2(PlayField2.this, "Match Draw!!!", PlayField2.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
-            }
-            totalSelectBoxes++;
-            changePlayerTurn(1);
-        }
+            } else {
+                totalSelectBoxes++;
+                changePlayerTurn(2);
+                // Ход второго игрока - телефона, без нажатия на кнопку...
+                // сначала генерируем число от 0 до 9, пробегаемся по массиву если в массиве по этой позиции 0 ставим выбор второго игрока иначе генерируем новое число
+                Random rnd = new Random();
 
+                int rndPos;
+                boolean flag = true;
+                while (flag) {
+                    rndPos = rnd.nextInt(10);
+                    if (rndPos != 9) {
+                        if (isBoxSelectable(rndPos)) {
+                            switch (rndPos) {
+                                case 0:
+                                    image = image1;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 1:
+                                    image = image2;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 2:
+                                    image = image3;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 3:
+                                    image = image4;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 4:
+                                    image = image5;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 5:
+                                    image = image6;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 6:
+                                    image = image7;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 7:
+                                    image = image8;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+                                case 8:
+                                    image = image9;
+                                    flag = false;
+                                    boxPositions[rndPos] = 2;
+                                    break;
+
+                            } //end of switch
+
+                        } //end of if is selectedBox
+                    } // ens  if !=9
+                }
+                image.setImageResource(R.drawable.oimage_m);
+                if (checkResults()) {
+                    ResScreen2 resultDialog = new ResScreen2(PlayField2.this, playerTwoName.getText().toString() + " is a WINNER!!!", PlayField2.this);
+                    resultDialog.setCancelable(false);
+                    resultDialog.show();
+                    currentScoreTwo++;
+                    scorePlayTwo.setText(String.valueOf(currentScoreTwo));
+                } else if (totalSelectBoxes == 9) {
+                    ResScreen2 resultDialog = new ResScreen2(PlayField2.this, "Match Draw!!!", PlayField2.this);
+                    resultDialog.setCancelable(false);
+                    resultDialog.show();
+                } else {
+                    totalSelectBoxes++;
+                    changePlayerTurn(1);
+                }
+
+            }
+        }
     }
 
-    private boolean checkResults(){
+
+    private boolean checkResults() {
         boolean responce = false;
         for (int i = 0; i < combinationList.size(); i++) {
-            final  int[] combination = combinationList.get(i);
-            if (boxPositions[combination[0]] == activePlayer && boxPositions[combination[1]]==activePlayer && boxPositions[combination[2]]==activePlayer) {
+            final int[] combination = combinationList.get(i);
+            if (boxPositions[combination[0]] == activePlayer && boxPositions[combination[1]] == activePlayer && boxPositions[combination[2]] == activePlayer) {
                 responce = true;
             }
         }

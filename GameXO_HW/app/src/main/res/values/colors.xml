@@ -5,5 +5,7 @@
     <color name="yellow">#F1FF32</color>
     <color name="common">#2B2D30</color>
     <color name="blue">#0000FF</color>
+    <color name="red">#FF0000</color>
+
 
 </resources>
