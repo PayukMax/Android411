@@ -4,13 +4,17 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
@@ -20,9 +24,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class MainActivity extends AppCompatActivity {
+private int currentProgress=0;
+private ProgressBar progressBar;
+private EditText mytext;
+private ChipGroup chipGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +120,57 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        progressBar= findViewById(R.id.progBarHoriz);
+
+        Button btnPG = findViewById(R.id.btnForProgress);
+        btnPG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ProgressBar pg1 = findViewById(R.id.progressBar);
+//                pg1.setVisibility(View.VISIBLE);
+                currentProgress += 10;
+                progressBar.setMax(100); // Устанавливаем максимально значение прогресс бара
+                progressBar.setProgress(currentProgress); // устанавливаем текущее значение исполненного от максимального значения
+
+
+            }
+        });
+
+        mytext = findViewById(R.id.editTextText);
+        chipGroup = findViewById(R.id.chipGroup);
+
+        Button btnAdd = findViewById(R.id.butAdd);
+        Button btnShow = findViewById(R.id.butShow);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewChip();
+            }
+        });
+
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSelections();
+            }
+        });
+
+
+
+
+//        Chip chip1 = findViewById(R.id.chip);
+//        chip1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "Action complete", Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+
+
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -126,5 +187,42 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
+    }
+
+    private void showSelections(){
+        int count = chipGroup.getChildCount(); // получаем количество вложений в группу
+        String s=null;
+        for (int i = 0; i < count; i++) {
+            Chip child = (Chip) chipGroup.getChildAt(i);
+            if(!child.isChecked()){
+                continue;
+            }
+            if(s==null){ s=child.getText().toString();} else {s +=", "+child.getText().toString();}
+        }
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    private void addNewChip(){
+        String keyword = mytext.getText().toString();
+        if (keyword.isEmpty()) {
+            Toast.makeText(this, "Please enter text...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        LayoutInflater inflater = LayoutInflater.from(this);
+        Chip newChip = (Chip) inflater.inflate(R.layout.layout_chip_entry, this.chipGroup, false);
+        newChip.setText(keyword);
+        chipGroup.addView(newChip);
+        mytext.setText("");
+        newChip.setOnCloseIconClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleChipCloseIconClicked((Chip) v);
+            }
+        });
+
+    }
+    private void handleChipCloseIconClicked(Chip chip){
+        ChipGroup parent = (ChipGroup) chip.getParent(); // для удаления эменета необходимо обратиться к родительскому элементу - находим родителя
+        parent.removeView(chip); // через родителя удаляем необходимый элемент - это тот который пришел
     }
 }
