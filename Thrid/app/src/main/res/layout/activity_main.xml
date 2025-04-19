@@ -128,8 +128,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textStyle="italic"
         android:text="Italic"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boldChBox" />
 
@@ -172,8 +172,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="16"
-        android:inputType="textPersonName"
         android:hint="names"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progBarHoriz" />
@@ -209,89 +209,103 @@
 
     </com.google.android.material.chip.ChipGroup>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
     <!--    <HorizontalScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/progBarHoriz">-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_marginStart="20dp"-->
+    <!--        android:layout_marginEnd="20dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/progBarHoriz">-->
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical"-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:orientation="vertical"-->
 
-<!--            >-->
+    <!--            >-->
 
-<!--            <com.google.android.material.chip.ChipGroup-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                app:chipSpacingHorizontal="30dp"-->
-<!--                app:chipSpacingVertical="0dp"-->
-<!--                app:singleLine="true"-->
+    <!--            <com.google.android.material.chip.ChipGroup-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="20dp"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:layout_marginEnd="20dp"-->
+    <!--                app:chipSpacingHorizontal="30dp"-->
+    <!--                app:chipSpacingVertical="0dp"-->
+    <!--                app:singleLine="true"-->
 
-<!--                >-->
+    <!--                >-->
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    android:id="@+id/chip2"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="One"-->
-<!--                    android:theme="@style/Theme.MaterialComponents.Light"-->
-<!--                    />-->
+    <!--                <com.google.android.material.chip.Chip-->
+    <!--                    android:id="@+id/chip2"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="One"-->
+    <!--                    android:theme="@style/Theme.MaterialComponents.Light"-->
+    <!--                    />-->
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    android:id="@+id/chip3"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Two"-->
-<!--                    android:theme="@style/Theme.MaterialComponents.Bridge"-->
-<!--                    />-->
+    <!--                <com.google.android.material.chip.Chip-->
+    <!--                    android:id="@+id/chip3"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Two"-->
+    <!--                    android:theme="@style/Theme.MaterialComponents.Bridge"-->
+    <!--                    />-->
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    android:id="@+id/chip4"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Three"-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Entry"-->
-<!--                    />-->
+    <!--                <com.google.android.material.chip.Chip-->
+    <!--                    android:id="@+id/chip4"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Three"-->
+    <!--                    style="@style/Widget.MaterialComponents.Chip.Entry"-->
+    <!--                    />-->
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    android:id="@+id/chip5"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Four"-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                    />-->
+    <!--                <com.google.android.material.chip.Chip-->
+    <!--                    android:id="@+id/chip5"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Four"-->
+    <!--                    style="@style/Widget.MaterialComponents.Chip.Choice"-->
+    <!--                    />-->
 
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    android:id="@+id/chip6"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Five"-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Filter"-->
-<!--                    />-->
-<!--            </com.google.android.material.chip.ChipGroup>-->
-<!--        </LinearLayout>-->
-<!--    </HorizontalScrollView>-->
+    <!--                <com.google.android.material.chip.Chip-->
+    <!--                    android:id="@+id/chip6"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Five"-->
+    <!--                    style="@style/Widget.MaterialComponents.Chip.Filter"-->
+    <!--                    />-->
+    <!--            </com.google.android.material.chip.ChipGroup>-->
+    <!--        </LinearLayout>-->
+    <!--    </HorizontalScrollView>-->
 
     <!--    <com.google.android.material.chip.Chip-->
-<!--        android:id="@+id/chip"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="Chip Action"-->
-<!--        app:chipIcon="@drawable/baseline_wb_sunny_24"-->
-<!--        app:closeIconVisible="true"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/progBarHoriz" />-->
+    <!--        android:id="@+id/chip"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:text="Chip Action"-->
+    <!--        app:chipIcon="@drawable/baseline_wb_sunny_24"-->
+    <!--        app:closeIconVisible="true"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/progBarHoriz" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
