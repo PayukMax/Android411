@@ -1,5 +1,6 @@
 package com.example.thrid;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,16 +19,36 @@ public class HW extends AppCompatActivity {
     Switch sw;
     EditText sum;
     TextView res;
+    String summa_save, swSave;
+
+    SharedPreferences sharedPreferences; // понадобится для сохранения чего-то внутри телефона, формат ключь-значение
+    private static final String SHARED_PREF_NAME = "myprefhw"; // название для общих настроек - типа создаем файлик с именем
+    private static final String KEY_NAME = "summa"; // здесь сохраним имя
+    private static final String KEY_SW = "sw";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hw);
-
         sum = findViewById(R.id.editSumm);
         sw = findViewById(R.id.switch2);
         Button btn = findViewById(R.id.button2);
         res = findViewById(R.id.result);
+
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE); // создаем файл с именем и правами только из этого приложения, MOD_WORD_WR....
+        summa_save = sharedPreferences.getString(KEY_NAME, null);
+        swSave = sharedPreferences.getString(KEY_SW, null);
+
+        if (summa_save != null) {
+            sum.setText(summa_save);
+            if (swSave != null) {
+                if (swSave.equals("1")) sw.setChecked(true);
+                else sw.setChecked(false);
+            }
+            res.setText(getMessage());
+        }
+
+
 
         sum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +67,13 @@ public class HW extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(KEY_NAME, sum.getText().toString());
+                if (sw.isChecked()) swSave = "1";
+                else swSave = "0";
+                editor.putString(KEY_SW, swSave);
+                editor.apply();
+                finish();
             }
         });
 
