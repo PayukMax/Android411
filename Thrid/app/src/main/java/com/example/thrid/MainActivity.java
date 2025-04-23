@@ -1,5 +1,6 @@
 package com.example.thrid;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -34,11 +35,13 @@ private ProgressBar progressBar;
 private EditText mytext;
 private ChipGroup chipGroup;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = findViewById(R.id.button);
+        Button btnNext = findViewById(R.id.btn_next);
 
         RadioGroup radGr = findViewById(R.id.radioGroup);
         TextView textView = findViewById(R.id.changeColor);
@@ -155,6 +158,14 @@ private ChipGroup chipGroup;
             @Override
             public void onClick(View v) {
                 showSelections();
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HWActivity2.class);
+                startActivity(intent);
             }
         });
 
