@@ -1,7 +1,6 @@
 package com.example.gamequiz;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,19 +16,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Objects;
 import java.util.Random;
 
-public class Level1 extends AppCompatActivity {
+public class Level2 extends AppCompatActivity {
 
     Dialog dialog;
-    Dialog dialogEnd;
 
     public int numLeft; // переменная для левой картинки + текст
     public int numRight;
@@ -70,7 +64,7 @@ public class Level1 extends AppCompatActivity {
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Level1.this, GameLevels.class);
+                Intent intent = new Intent(Level2.this, GameLevels.class);
                 startActivity(intent);
                 dialog.dismiss(); // закрытие диалогового окна
             }
@@ -85,36 +79,17 @@ public class Level1 extends AppCompatActivity {
         });
 
         dialog.show(); // собственно отобразить диалоговое окно
-////-------------------------------------------------------------------------------------
-//        // вызов диалогового окна в конце игры
-//        dialogEnd = new Dialog(this);
-//        dialogEnd.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialogEnd.setContentView(R.layout.dialog_end);
-//        dialogEnd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialogEnd.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
-//        dialogEnd.setCancelable(false); // запрет закрытия за пределами окна
-//
-//        TextView btnClose2 = findViewById(R.id.button_close);
-//        btnClose2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // возвращаемся к выбору уровня
-//                Intent intent = new Intent(Level1.this, GameLevels.class);
-//                startActivity(intent);
-//                dialogEnd.dismiss();
-//            }
-//        });
-//        //-------------------------------------------------------------------------------------
+
         Button btnBack = findViewById(R.id.button_back_level1);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Level1.this, GameLevels.class);
+                Intent intent = new Intent(Level2.this, GameLevels.class);
                 startActivity(intent);
             }
         });
 
-        final Animation animation = AnimationUtils.loadAnimation(Level1.this, R.anim.alpha);
+        final Animation animation = AnimationUtils.loadAnimation(Level2.this, R.anim.alpha);
         numLeft = random.nextInt(10);
         imgLeft.setImageResource(array.images1[numLeft]);
         textLeft.setText(array.text1[numLeft]); // достаем из массива текст
@@ -189,7 +164,7 @@ public class Level1 extends AppCompatActivity {
                         }
                     }
                     if (count == 20) { //выход из уровня
-                        dialogEnd.show();
+
 
                     } else {
                         numLeft = random.nextInt(10);
@@ -256,7 +231,7 @@ public class Level1 extends AppCompatActivity {
                         }
                     }
                     if (count == 20) { //выход из уровня
-                        dialogEnd.show();
+
                     } else {
                         numRight = random.nextInt(10);
                         imgRight.setImageResource(array.images1[numLeft]);
