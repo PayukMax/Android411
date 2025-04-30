@@ -30,3 +30,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
+
+// тест пометок с ноута
