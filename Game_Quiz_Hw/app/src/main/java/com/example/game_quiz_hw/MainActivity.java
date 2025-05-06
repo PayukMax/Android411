@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences;
         Button btnLogout = findViewById(R.id.btn_logout);
         TextView firstText = findViewById(R.id.first_text);
+        TextView pointsText = findViewById(R.id.points);
 
 
         sharedPreferences = getSharedPreferences("myhwpref", MODE_PRIVATE); // создаем файл с именем и правами только из этого приложения, MOD_WORD_WR....
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             firstText.setText(name);
+            pointsText.setText("0 points...");
+
 
         }
 
@@ -45,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
                 editor.clear();
                 editor.apply();
                 finish();
+            }
+        });
+
+        Button btnGame1 = findViewById(R.id.btn_game1);
+        btnGame1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Level1.class);
+                startActivity(intent);
             }
         });
 

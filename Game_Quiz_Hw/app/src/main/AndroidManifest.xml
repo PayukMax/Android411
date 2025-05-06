@@ -16,6 +16,12 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+            android:name=".Level1"
+            android:exported="false"
+            android:screenOrientation="behind"
+            tools:ignore="DiscouragedApi"
+            />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
