@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -86,25 +87,38 @@ public class Level1 extends AppCompatActivity {
 
         dialog.show(); // собственно отобразить диалоговое окно
 ////-------------------------------------------------------------------------------------
-//        // вызов диалогового окна в конце игры
-//        dialogEnd = new Dialog(this);
-//        dialogEnd.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialogEnd.setContentView(R.layout.dialog_end);
-//        dialogEnd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialogEnd.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
-//        dialogEnd.setCancelable(false); // запрет закрытия за пределами окна
-//
-//        TextView btnClose2 = findViewById(R.id.button_close);
-//        btnClose2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // возвращаемся к выбору уровня
-//                Intent intent = new Intent(Level1.this, GameLevels.class);
-//                startActivity(intent);
-//                dialogEnd.dismiss();
-//            }
-//        });
+        // вызов диалогового окна в конце игры
+        dialogEnd = new Dialog(this);
+        dialogEnd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogEnd.setContentView(R.layout.dialog_end);
+        dialogEnd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // прозрачный фон диалогового окна - нет белой рамки вокруг
+        dialogEnd.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        dialogEnd.setCancelable(false); // запрет закрытия за пределами окна
+
+        TextView btnClose2 = dialogEnd.findViewById(R.id.button_close);
+        btnClose2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // возвращаемся к выбору уровня
+                Intent intent = new Intent(Level1.this, GameLevels.class);
+                startActivity(intent);
+                dialogEnd.dismiss();
+            }
+        });
+
+        Button btn_continue_2 = dialogEnd.findViewById(R.id.button_continue);
+        btn_continue_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Level1.this, Level2.class);
+                startActivity(intent);
+                dialogEnd.dismiss();
+            }
+        });
+
 //        //-------------------------------------------------------------------------------------
+
+
         Button btnBack = findViewById(R.id.button_back_level1);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +203,13 @@ public class Level1 extends AppCompatActivity {
                         }
                     }
                     if (count == 20) { //выход из уровня
+                        SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE); // сохраняем текущую ситуацию по пройденным уровням
+                        final int level = save.getInt("Level", 1);
+                        if (level <= 1) {
+                            SharedPreferences.Editor editor = save.edit();
+                            editor.putInt("Level", 2);
+                            editor.apply(); // в конце первого уровня считываем текущее значение из куков и если оно меньше текущего то сохряняем текущее+1, дабы следующий уровень открылся
+                        }
                         dialogEnd.show();
 
                     } else {
@@ -219,7 +240,7 @@ public class Level1 extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    imgLeft.setEnabled(false); // если нажали левую - блокируем правую
+                    imgLeft.setEnabled(false); // если нажали правую - блокируем левую
                     if (numRight > numLeft) {
                         imgRight.setImageResource(R.drawable.img_true);
                     } else {
@@ -256,19 +277,27 @@ public class Level1 extends AppCompatActivity {
                         }
                     }
                     if (count == 20) { //выход из уровня
+                        SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE); // сохраняем текущую ситуацию по пройденным уровням
+                        final int level = save.getInt("Level", 1);
+                        if (level <= 1) {
+                            SharedPreferences.Editor editor = save.edit();
+                            editor.putInt("Level", 2);
+                            editor.apply();
+                        }
                         dialogEnd.show();
+
                     } else {
                         numRight = random.nextInt(10);
-                        imgRight.setImageResource(array.images1[numLeft]);
+                        imgRight.setImageResource(array.images1[numRight]);/// ТРАБЛА!!!!!!!
                         imgRight.startAnimation(animation);
-                        textRight.setText(array.text1[numLeft]);
+                        textRight.setText(array.text1[numRight]);
                         do {
                             numLeft = random.nextInt(10);
                         } while (numRight == numLeft);
 
-                        imgLeft.setImageResource(array.images1[numRight]);
+                        imgLeft.setImageResource(array.images1[numLeft]);
                         imgLeft.startAnimation(animation);
-                        textLeft.setText(array.text1[numRight]);
+                        textLeft.setText(array.text1[numLeft]);
                         imgLeft.setEnabled(true);
 
 

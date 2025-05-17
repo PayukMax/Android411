@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Домашняя с фрагментами</string>
+    <string name="fragm1">Привет фрагмент 1</string>
+    <string name="fragm2">Привет фрагмент 2</string>
+    <string name="fragm3">Привет фрагмент 3</string>
+    <string name="fragm_1">Фрагмент 1</string>
+    <string name="fragm_2">Фрагмент 2</string>
+    <string name="fragm_3">Фрагмент 3</string>
+    <string name="hello_text">Пример Проекта</string>
+</resources>

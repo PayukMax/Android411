@@ -3,6 +3,7 @@ package com.example.gamequiz;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.util.Random;
 public class Level2 extends AppCompatActivity {
 
     Dialog dialog;
+    Dialog dialogEnd;
 
     public int numLeft; // переменная для левой картинки + текст
     public int numRight;
@@ -39,7 +41,7 @@ public class Level2 extends AppCompatActivity {
         setContentView(R.layout.universal);
 
         TextView textLevels = findViewById(R.id.textView);
-        textLevels.setText(R.string.level1);
+        textLevels.setText(R.string.level2);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //убираем верхнюю строку состояния
 
@@ -59,6 +61,10 @@ public class Level2 extends AppCompatActivity {
         dialog.setContentView(R.layout.preview_dialog); // указываем шаблон диалогового окна
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // добавляем прозрачный фон диалогового окна
         dialog.setCancelable(false); // запрещаем закрытие окна кликом зе пределами диалогового окна
+        ImageView previewImg = dialog.findViewById(R.id.preview_img);
+        previewImg.setImageResource(R.drawable.number_lev_two);
+        TextView textDescription = dialog.findViewById(R.id.text_description);
+        textDescription.setText(R.string.level_two);
 
         TextView btnClose = dialog.findViewById(R.id.button_close);
         btnClose.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +86,44 @@ public class Level2 extends AppCompatActivity {
 
         dialog.show(); // собственно отобразить диалоговое окно
 
+        ////-------------------------------------------------------------------------------------
+        // вызов диалогового окна в конце игры
+        dialogEnd = new Dialog(this);
+        dialogEnd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogEnd.setContentView(R.layout.dialog_end);
+        dialogEnd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // прозрачный фон диалогового окна - нет белой рамки вокруг
+        dialogEnd.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialogEnd.setCancelable(false); // запрет закрытия за пределами окна
+        TextView textDescrEnd = dialogEnd.findViewById(R.id.text_description_end);
+        textDescrEnd.setText(R.string.level_two_end);
+
+        TextView btnClose2 = dialogEnd.findViewById(R.id.button_close);
+        btnClose2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // возвращаемся к выбору уровня
+                Intent intent = new Intent(Level2.this, GameLevels.class);
+                startActivity(intent);
+                dialogEnd.dismiss();
+            }
+        });
+
+        Button btn_continue_2 = dialogEnd.findViewById(R.id.button_continue);
+        btn_continue_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Level2.this, Level3.class);
+                startActivity(intent);
+                dialogEnd.dismiss();
+            }
+        });
+
+//        //-------------------------------------------------------------------------------------
+
+
+
+
+
         Button btnBack = findViewById(R.id.button_back_level1);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,15 +135,15 @@ public class Level2 extends AppCompatActivity {
 
         final Animation animation = AnimationUtils.loadAnimation(Level2.this, R.anim.alpha);
         numLeft = random.nextInt(10);
-        imgLeft.setImageResource(array.images1[numLeft]);
-        textLeft.setText(array.text1[numLeft]); // достаем из массива текст
+        imgLeft.setImageResource(array.images2[numLeft]);
+        textLeft.setText(array.text2[numLeft]); // достаем из массива текст
 
         numRight = random.nextInt(10);
         while (numLeft == numRight) {
             numRight = random.nextInt(10);
         }
-        imgRight.setImageResource(array.images1[numRight]);
-        textRight.setText(array.text1[numRight]); // достаем из массива текст
+        imgRight.setImageResource(array.images2[numRight]);
+        textRight.setText(array.text2[numRight]); // достаем из массива текст
 
         // массив для прогресса игры
         final int[] progress = {R.id.point1,
@@ -164,20 +208,27 @@ public class Level2 extends AppCompatActivity {
                         }
                     }
                     if (count == 20) { //выход из уровня
-
+                        SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE); // сохраняем текущую ситуацию по пройденным уровням
+                        final int level = save.getInt("Level", 2);
+                        if (level <= 2) {
+                            SharedPreferences.Editor editor = save.edit();
+                            editor.putInt("Level", 3);
+                            editor.apply();
+                        }
+                        dialogEnd.show();
 
                     } else {
                         numLeft = random.nextInt(10);
-                        imgLeft.setImageResource(array.images1[numLeft]);
+                        imgLeft.setImageResource(array.images2[numLeft]);
                         imgLeft.startAnimation(animation);
-                        textLeft.setText(array.text1[numLeft]);
+                        textLeft.setText(array.text2[numLeft]);
                         do {
                             numRight = random.nextInt(10);
                         } while (numLeft == numRight);
 
-                        imgRight.setImageResource(array.images1[numRight]);
+                        imgRight.setImageResource(array.images2[numRight]);
                         imgRight.startAnimation(animation);
-                        textRight.setText(array.text1[numRight]);
+                        textRight.setText(array.text2[numRight]);
                         imgRight.setEnabled(true);
 
 
@@ -231,19 +282,26 @@ public class Level2 extends AppCompatActivity {
                         }
                     }
                     if (count == 20) { //выход из уровня
-
+                        SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE); // сохраняем текущую ситуацию по пройденным уровням
+                        final int level = save.getInt("Level", 2);
+                        if (level <= 2) {
+                            SharedPreferences.Editor editor = save.edit();
+                            editor.putInt("Level", 3);
+                            editor.apply();
+                        }
+                        dialogEnd.show();
                     } else {
                         numRight = random.nextInt(10);
-                        imgRight.setImageResource(array.images1[numLeft]);
+                        imgRight.setImageResource(array.images2[numRight]);
                         imgRight.startAnimation(animation);
-                        textRight.setText(array.text1[numLeft]);
+                        textRight.setText(array.text2[numRight]);
                         do {
                             numLeft = random.nextInt(10);
                         } while (numRight == numLeft);
 
-                        imgLeft.setImageResource(array.images1[numRight]);
+                        imgLeft.setImageResource(array.images2[numLeft]);
                         imgLeft.startAnimation(animation);
-                        textLeft.setText(array.text1[numRight]);
+                        textLeft.setText(array.text2[numLeft]);
                         imgLeft.setEnabled(true);
 
 
