@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="level_one">Выбери цифру которая больше.\nВопросы могут повторяться, пока Вы не наберете 20 очков.</string>
-    <string name="level_one_end">"Поздравляем уровень пройден.\n
-        А знаете ли Вы что число 7 является счастливым числом. Существует 7 дней в неделе, 7 континентов, 7 цветов радуги, 7 музыкальных нот и многое другое.
-        Так же число 7 является любимым числом большенства людей в мире."</string>
+    <string name="level_one">Choose the number that is higher.\nThe questions can be repeated until you score 20 points.</string>
+    <string name="level_one_end">"Congratulations on completing the level.\n
+        Did you know that the number 7 is a lucky number? There are 7 days in a week, 7 continents, 7 colors of the rainbow, 7 musical notes and much more.
+        Also, the number 7 is the favorite number of most people in the world."</string>
+    <string name="level_two">Choose the Roman numeral that is larger.\nThe questions can be repeated until you score 20 points.</string>
+    <string name="level_two_end">"Congratulations on completing the level.\n
+        Did you know that there is no zero in Roman numerals?"</string>
 
+    <string name="level_three">Choose the fraction that is larger.\nThe questions can be repeated until you score 20 points.</string>
+    <string name="level_three_end">"Congratulations on completing the level.\n
+        Operations on fractions in the middle of the century were considered the most difficult area of mathematics."</string>
+    <string name="level_four">Choose something edible.\nThe questions can be repeated until you score 20 points.</string>
+    <string name="level_four_end">"Congratulations on completing the level.\n
+        Many crocodiles swallow rocks. But not because the stones are edible for them. The stones help them sink into the water faster and stay on the bottom."</string>
 </resources>

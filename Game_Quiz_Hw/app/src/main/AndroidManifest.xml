@@ -22,6 +22,12 @@
             tools:ignore="DiscouragedApi"
             />
         <activity
+            android:name=".Level2"
+            android:exported="false"
+            android:screenOrientation="behind"
+            tools:ignore="DiscouragedApi"
+            />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
