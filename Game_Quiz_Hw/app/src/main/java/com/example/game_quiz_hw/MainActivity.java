@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
-                finish();
+//                finish();
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -90,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         btnGame3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Level1.class);
+                Intent intent = new Intent(MainActivity.this, Level3.class);
                 startActivity(intent);
             }
         });
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         btnGame4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Level1.class);
+                Intent intent = new Intent(MainActivity.this, Level4.class);
                 startActivity(intent);
             }
         });

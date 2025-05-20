@@ -1,12 +1,24 @@
 <resources>
     <string name="app_name">Game_Quiz_Hw</string>
-    <string name="start">Начать</string>
-    <string name="back">Назад</string>
-    <string name="level">Уровень:</string>
-    <string name="level1">Уровень: 1</string>
+    <string name="level">Level :</string>
+    <string name="level1">Level: 1</string>
     <string name="level2">Level: 2</string>
     <string name="level3">Level: 3</string>
     <string name="level4">Level: 4</string>
     <string name="text_continue">Continue</string>
+    <string name="start">Start</string>
+    <string name="back">Back</string>
+    <string name="logout">Logout</string>
+    <string name="you_have">You have</string>
+    <string name="points">points...</string>
+    <string name="let_s_play">Let\'s play?</string>
+    <string name="game_1">game 1</string>
+    <string name="game_2">game 2</string>
+    <string name="game_3">game 3</string>
+    <string name="game_4">game 4</string>
+    <string name="welcome_nplase_register">WELCOME\nPlase register</string>
+    <string name="enter_you_name">Enter you name...</string>
+    <string name="register">Register</string>
+    <string name="you_are_registred_as">You are registred as</string>
 
 </resources>
