@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Spiner_HW</string>
+
+    <string-array name="cities">
+        <item>Астрахань</item>
+        <item>Батуми</item>
+        <item>Волгоград</item>
+        <item>Екатеринбург</item>
+        <item>Калининград</item>
+        <item>Москва</item>
+        <item>Санкт-Петербург</item>
+        <item>Усть-Каменогорск</item>
+    </string-array>
+
+
+
+
+</resources>
