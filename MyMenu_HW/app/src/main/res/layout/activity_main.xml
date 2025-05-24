@@ -14,11 +14,12 @@
             android:id="@+id/materialToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_green"
+            android:background="@color/menu_main"
             app:navigationIcon="@drawable/baseline_apps_24"
             app:title="My Probe Application"
             app:titleTextColor="@color/white"
-            android:paddingTop="20dp"
+            android:paddingTop="40dp"
+            android:paddingStart="20dp"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -35,7 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:headerLayout="@layout/header"
-        app:menu="@menu/toolbar_menu"
+        app:menu="@menu/tool_menu"
+        android:layout_marginStart="20dp"
         android:layout_gravity="start"
         />
 

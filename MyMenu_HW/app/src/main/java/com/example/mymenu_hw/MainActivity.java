@@ -1,7 +1,10 @@
-package com.example.fragmentmenyapplication;
+package com.example.mymenu_hw;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -26,35 +29,55 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MaterialToolbar materialToolbar = findViewById(R.id.materialToolbar);
-        setSupportActionBar(materialToolbar);
+        setSupportActionBar(materialToolbar); // типа запустили меню...
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_open, R.string.drawer_cloce);
         drawerLayout.addDrawerListener(toggle);
 
-        replaceFragment(new FirstPage());
+//        TextView txt = findViewById(R.id.text1);
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("myhwmenu", MODE_PRIVATE);
+        String userName = sharedPreferences.getString("name", null);
+        Boolean menuMode = sharedPreferences.getBoolean("menumode", false);
+
+        if (userName == null ) {
+            Intent intent = new Intent(MainActivity.this, Registration.class);
+            startActivity(intent);
+        } else {
+//        txt.setText(userName+"/"+menuMode.toString());//
+        }
+
+        replaceFragment(new PageFirst());
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.first_page) {
-                    replaceFragment(new FirstPage());
+                    replaceFragment(new PageFirst());
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (item.getItemId() == R.id.second_page) {
                     replaceFragment(new SecondPage());
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (item.getItemId() == R.id.thrid_page) {
-                    replaceFragment(new SecondPage());
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                }else if (item.getItemId() == R.id. fourth_page) {
-                    replaceFragment(new SecondPage());
+                    replaceFragment(new ThridPage());
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
+//                else if (item.getItemId() == R.id.fourth_page) {
+//                    replaceFragment(new SecondPage());
+//                    drawerLayout.closeDrawer(GravityCompat.START);
+//                }
                 return false;
             }
         });
+
+
+
     }
 
     private void replaceFragment(Fragment fragment) {
