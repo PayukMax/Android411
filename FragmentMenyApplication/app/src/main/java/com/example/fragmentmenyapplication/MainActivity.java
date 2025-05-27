@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_open, R.string.drawer_cloce);
         drawerLayout.addDrawerListener(toggle);
 
-        replaceFragment(new FirstPage());
+        replaceFragment(new SecondPage()); // устанавлиаем страницу по умолчанию при старте приложения
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
