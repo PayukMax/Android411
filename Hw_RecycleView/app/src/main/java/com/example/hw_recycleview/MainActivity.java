@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
         btnClose = findViewById(R.id.btnExit);
         recyclerView = findViewById(R.id.recView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         adapter = new DataAdapter(dataList);
         recyclerView.setAdapter(adapter);
 
@@ -46,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String data = textA.getText().toString()+"/"+textB.getText().toString();
-                dataList.add(data);
-                textA.setText("");
-                textB.setText("");
-                adapter.notifyDataSetChanged();
+                if(data.length()>1){
+                    dataList.add(data);
+                    textA.setText("");
+                    textB.setText("");
+                    adapter.notifyDataSetChanged();
+                } else Toast.makeText(MainActivity.this, "Необходимо заполнить поле 1 или поле 2", Toast.LENGTH_LONG).show();
+
 
             }
         });
