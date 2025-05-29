@@ -1,0 +1,22 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id btnSaveReg
+id btn_logout
+id first_text
+id main
+id name_field
+id textView
+id textView2
+layout activity_main
+layout activity_register
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.Game_Quiz_HW
+style Theme.Game_Quiz_HW
+xml backup_rules
+xml data_extraction_rules
