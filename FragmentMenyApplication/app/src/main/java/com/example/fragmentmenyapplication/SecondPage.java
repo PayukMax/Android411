@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TimePicker;
+import android.widget.ViewSwitcher;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +37,10 @@ public class SecondPage extends Fragment {
 
     List<String> dataList = new ArrayList<>();
     DataAdapter adapter;
+    ImageButton beforeBtn, nextBtn;
+    ImageSwitcher imageSwitcher;
+    int index = 0;
+    int[] mas = {R.drawable.inedible_1, R.drawable.inedible_2, R.drawable.edible_1, R.drawable.edible_8};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +70,7 @@ public class SecondPage extends Fragment {
             }
         });
 
-        editText=view.findViewById(R.id.editText);
+        editText = view.findViewById(R.id.editText);
         add = view.findViewById(R.id.add);
         recyclerView = view.findViewById(R.id.recycleView);
 
@@ -80,17 +88,52 @@ public class SecondPage extends Fragment {
             }
         });
 
+        beforeBtn = view.findViewById(R.id.before);
+        nextBtn = view.findViewById(R.id.next);
+        imageSwitcher = view.findViewById(R.id.imageSwitcher);
+
+        beforeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index--;
+                if (index<0) index= mas.length-1;
+                imageSwitcher.setImageResource(mas[index]);
+            }
+        });
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index++;
+                if (index>=mas.length) index=0;
+                imageSwitcher.setImageResource(mas[index]);
+            }
+        });
+
+        imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imageView = new ImageView(getActivity().getApplicationContext());
+                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                imageView.setMaxWidth(250);
+                imageView.setMaxHeight(350);
+
+                return imageView;
+            }
+        });
+
+        imageSwitcher.setImageResource(mas[index]);
 
         return view;
     }
 
     private void showTimeDialog(EditText time) {
         calendar = Calendar.getInstance();
-        timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+        timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                calendar.set(Calendar.MINUTE,minute);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
                 time.setText(simpleDateFormat.format(calendar.getTime()));
             }
@@ -112,6 +155,6 @@ public class SecondPage extends Fragment {
             }
         };
 
-        new DatePickerDialog(getContext(),dateSetListener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, materialToolbar, R.string.drawer_open, R.string.drawer_cloce);
         drawerLayout.addDrawerListener(toggle);
 
-        replaceFragment(new SecondPage()); // устанавлиаем страницу по умолчанию при старте приложения
+        replaceFragment(new FirstPage()); // устанавлиаем страницу по умолчанию при старте приложения
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new SecondPage());
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (item.getItemId() == R.id.thrid_page) {
-                    replaceFragment(new SecondPage());
+                    replaceFragment(new ThirfFragment());
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else if (item.getItemId() == R.id. fourth_page) {
-                    replaceFragment(new SecondPage());
+                    replaceFragment(new FourthFragment());
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 return false;

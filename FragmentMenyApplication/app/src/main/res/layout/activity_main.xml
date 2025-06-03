@@ -19,6 +19,7 @@
             app:title="My Probe Application"
             app:titleTextColor="@color/white"
             android:paddingTop="20dp"
+
             />
 
     </com.google.android.material.appbar.AppBarLayout>
