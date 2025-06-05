@@ -44,7 +44,7 @@ public class MainActivity2 extends AppCompatActivity {
                 try (FileOutputStream fos = new FileOutputStream(getExternalPath())) {
                     String txt = edText.getText().toString();
                     fos.write(txt.getBytes());
-                    Toast.makeText(MainActivity2.this, "File saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "File 2222 saved", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     Toast.makeText(MainActivity2.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
