@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,39 +23,69 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity3 extends AppCompatActivity {
 
     Button takePermission;
+    TextView txtPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-    takePermission=findViewById(R.id.btnPermission);
-    takePermission.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // Разрешение до Android 10 (API 29)
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(MainActivity3.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},100);
-                }
-            }
-            // Разрешение для Android 11 (API 30) и выше
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-                if (!Environment.isExternalStorageManager()){
-                    try {
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                        intent.addCategory("android.intent.category.DEFAULT");
-                        intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
-                        startActivityIfNeeded(intent,101);
-                    } catch (Exception e) {
-                        Intent intent = new Intent();
-                        intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                        startActivityIfNeeded(intent,101);
+        txtPermission = findViewById(R.id.textPermission);
+        txtPermission.setText(checkPermission());
+
+
+
+        takePermission = findViewById(R.id.btnPermission);
+        takePermission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Разрешение до Android 10 (API 29)
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+                    if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MainActivity3.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+
                     }
                 }
-            }
-        }
-    });
+                // Разрешение для Android 11 (API 30) и выше
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        try {
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                            intent.addCategory("android.intent.category.DEFAULT");
+                            intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
+                            startActivityIfNeeded(intent, 101);
+                        } catch (Exception e) {
+                            Intent intent = new Intent();
+                            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                            startActivityIfNeeded(intent, 101);
+                        }
+                    }
+                }
 
+                txtPermission.setText(checkPermission());
+//                Intent intent = getIntent();
+//                finish();
+//                startActivity(intent);
+                recreate();
+            }
+        });
+
+
+    }
+
+    private String checkPermission(){
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                return "(API<30)Разрешение на доступ к файлам предоставлено...";
+            else return "(API<30)В азрешении на доступ к файлам отказано...";
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            if (Environment.isExternalStorageManager())
+                return "(API>30)Разрешение на доступ к файлам предоставлено...";
+            else return "(API>30)В разрешении на доступ к файлам отказано...";
+        }
+
+        return "Не определено...";
     }
 }

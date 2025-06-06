@@ -9,9 +9,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity3">
 
+    <TextView
+        android:id="@+id/textPermission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:textAlignment="center"
+        android:text="" />
+
     <Button
         android:id="@+id/btnPermission"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Запросить разрешения" />
+
 </LinearLayout>
