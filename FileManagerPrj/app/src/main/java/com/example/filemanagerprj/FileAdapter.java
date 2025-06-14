@@ -51,23 +51,25 @@ public class FileAdapter extends RecyclerView.Adapter<FileViewHolder> {
         }
 
         if(file.get(position).getName().toLowerCase().endsWith(".jpeg")){
-            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
+            holder.imgFile.setImageResource(R.drawable.outline_broken_image_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".jpg")) {
-            holder.imgFile.setImageResource(R.drawable.outline_bookmark_manager_24);
+            holder.imgFile.setImageResource(R.drawable.outline_broken_image_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".png")) {
-            holder.imgFile.setImageResource(R.drawable.baseline_folder_24);
+            holder.imgFile.setImageResource(R.drawable.outline_broken_image_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".pdf")) {
-            holder.imgFile.setImageResource(R.drawable.baseline_folder_24);
+            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
+        } else if (file.get(position).getName().toLowerCase().endsWith(".txt")) {
+            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".doc")) {
-            holder.imgFile.setImageResource(R.drawable.baseline_folder_24);
+            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".mp3")) {
-            holder.imgFile.setImageResource(R.drawable.baseline_folder_24);
+            holder.imgFile.setImageResource(R.drawable.outline_autoplay_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".wav")) {
-            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
+            holder.imgFile.setImageResource(R.drawable.outline_autoplay_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".mp4")) {
-            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
+            holder.imgFile.setImageResource(R.drawable.outline_hangout_video_24);
         } else if (file.get(position).getName().toLowerCase().endsWith(".apk")) {
-            holder.imgFile.setImageResource(R.drawable.outline_docs_24);
+            holder.imgFile.setImageResource(R.drawable.outline_apk_document_24);
         } else {
             holder.imgFile.setImageResource(R.drawable.baseline_folder_24);
         }
