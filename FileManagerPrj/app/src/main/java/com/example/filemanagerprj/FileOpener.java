@@ -11,6 +11,7 @@ import java.io.File;
 public class FileOpener {
     public static void openFile (Context context, File file){
         File selectedFile = file;
+        String tmp = context.getApplicationContext().getPackageName();
         Uri uri = FileProvider.getUriForFile(context,context.getApplicationContext().getPackageName()+".provider", file);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (uri.toString().contains(".doc") || uri.toString().contains(".txt")){
