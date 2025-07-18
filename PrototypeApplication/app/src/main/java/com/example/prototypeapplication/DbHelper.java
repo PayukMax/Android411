@@ -2,12 +2,15 @@ package com.example.prototypeapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.ContentView;
 import androidx.annotation.Nullable;
+
+import java.util.LinkedList;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -52,7 +55,48 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public boolean checkRoot() {
         // нужно сделать выборку на предмет записей с ролью 0. если таковые нашлись - переходим на ЛОГИН если нет - регистрируем админа
-        return false;
+        LinkedList<UsersData> list = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
+        if (cursor.moveToFirst()){
+            do {
+                int pos1 = cursor.getColumnIndex(COL_1);
+                int pos2 = cursor.getColumnIndex(COL_2);
+                int pos3 = cursor.getColumnIndex(COL_3);
+                int pos4 = cursor.getColumnIndex(COL_4);
+                UsersData data = new UsersData(cursor.getInt(pos1),cursor.getString(pos2),cursor.getString(pos3), cursor.getInt(pos4));
+                list.add(data);
+            } while (cursor.moveToNext());
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).role==0) return true;
+            }
+            return false;
+
+        } else return false;
+    }
+
+    public boolean checkUser (String t_user, String t_passw){
+        LinkedList<UsersData> list = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
+        if (cursor.moveToFirst()){
+            do {
+                int pos1 = cursor.getColumnIndex(COL_1);
+                int pos2 = cursor.getColumnIndex(COL_2);
+                int pos3 = cursor.getColumnIndex(COL_3);
+                int pos4 = cursor.getColumnIndex(COL_4);
+                UsersData data = new UsersData(cursor.getInt(pos1),cursor.getString(pos2),cursor.getString(pos3), cursor.getInt(pos4));
+                list.add(data);
+            } while (cursor.moveToNext());
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).name.equals(t_user)) { // ищем пользователя
+                    if (list.get(i).passw.equals(t_passw)) return true; // Проверка совпадения пароля
+                }
+            }
+
+            }
+            return false;
+
     }
 
 }

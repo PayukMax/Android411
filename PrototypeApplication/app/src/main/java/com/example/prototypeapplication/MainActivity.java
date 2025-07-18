@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     RadioButton rb4;
 
     TextView tv;
+    int role=10;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // проверяем на предмет наличия базы и записи учетки админа в базе. если записей с ролью 0 нет ни одной - значит первый запуск.
+        DbHelper dbh = new DbHelper(this);
+        if (dbh.checkRoot()) {
+            Intent intent = new Intent(MainActivity.this, LoginAct.class);
+            startActivity(intent);
+            dbh.close();
+        }
+
 
         tv=findViewById(R.id.testText);
         name = findViewById(R.id.editName);
@@ -41,15 +50,19 @@ public class MainActivity extends AppCompatActivity {
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                tv.setText(String.valueOf(rg.getCheckedRadioButtonId()+" / "+rb4.getText().toString()));
+
+                int selectedId = rg.getCheckedRadioButtonId();
+                if (selectedId==R.id.rb1) role=1;
+                if (selectedId==R.id.rb2) role=2;
+                if (selectedId==R.id.rb3) role=3;
+                if (selectedId==R.id.rb4) role=0;
+
+                tv.setText(String.valueOf(role));
+
             }
         });
 
-        DbHelper dbh = new DbHelper(this);
-        if (dbh.checkRoot()) {
-            Intent intent = new Intent(MainActivity.this, LoginAct.class);
-            startActivity(intent);
-        }
+
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Поля должны быть заполнены!!!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Сохраняем в базу учетку с ролью 0
-                    boolean result = dbh.addUser(name.getText().toString(),passw.getText().toString(),0);
+                    boolean result = dbh.addUser(name.getText().toString(),passw.getText().toString(),role);
                     if (result) {Toast.makeText(MainActivity.this, "Пользователь добавлен!!!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, LoginAct.class);
                     startActivity(intent);} else
