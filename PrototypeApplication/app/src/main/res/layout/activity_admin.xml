@@ -7,4 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".AdminAct">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Режим администратора..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_new_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить пользователя"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="500dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

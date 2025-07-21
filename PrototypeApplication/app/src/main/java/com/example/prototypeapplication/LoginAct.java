@@ -1,5 +1,6 @@
 package com.example.prototypeapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,18 @@ public class LoginAct extends AppCompatActivity {
                     boolean result = dbh.checkUser(login_name.getText().toString(), login_passw.getText().toString());
                     if (result) {
                         Toast.makeText(LoginAct.this, "Авторизация успешно пройдена...", Toast.LENGTH_SHORT).show();
+                        if (dbh.getRole(login_name.getText().toString())==0){
+                            login_passw.setText("");
+                            Intent intent = new Intent(LoginAct.this, AdminAct.class);
+                            startActivity(intent);
+                            dbh.close();
+                        }
+                        if (dbh.getRole(login_name.getText().toString())==1){
+                            login_passw.setText("");
+                            Intent intent = new Intent(LoginAct.this, Role1Act.class);
+                            startActivity(intent);
+                            dbh.close();
+                        }
                     } else {
                         Toast.makeText(LoginAct.this, "Ошибка в имени пользоватея или пароле....", Toast.LENGTH_SHORT).show();
                     }

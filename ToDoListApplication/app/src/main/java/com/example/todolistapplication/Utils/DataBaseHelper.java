@@ -56,6 +56,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, contentValues, "ID=?", new String[]{String.valueOf(id)});
     }
 
+    public void updateStatus(int id, int status){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_3, status);
+        db.update(TABLE_NAME, contentValues, "ID=?", new String[]{String.valueOf(id)});
+    }
+
     public void deleteTask(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, "ID=?", new String[]{String.valueOf(id)});
@@ -77,6 +84,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         toDoModel.setId(cursor.getInt(cursor.getColumnIndex(COL_1)));
                         toDoModel.setTask(cursor.getString(cursor.getColumnIndex(COL_2)));
                         toDoModel.setStatus(cursor.getInt(cursor.getColumnIndex(COL_3)));
+                        modelList.add(toDoModel);
                     } while (cursor.moveToNext());
                 }
             }

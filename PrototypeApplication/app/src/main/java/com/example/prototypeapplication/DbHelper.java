@@ -55,48 +55,54 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public boolean checkRoot() {
         // нужно сделать выборку на предмет записей с ролью 0. если таковые нашлись - переходим на ЛОГИН если нет - регистрируем админа
+        LinkedList<UsersData> list = getUsersList();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).role == 0) return true;
+        }
+        return false;
+
+//        } else return false;
+    }
+
+    public boolean checkUser(String t_user, String t_passw) {
+        LinkedList<UsersData> list = getUsersList();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).name.equals(t_user)) { // ищем пользователя
+                if (list.get(i).passw.equals(t_passw)) return true; // Проверка совпадения пароля
+            }
+        }
+
+//            }
+            return false;
+    }
+
+    public int getRole(String t_user) {
+        LinkedList<UsersData> list = getUsersList();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).name.equals(t_user)) { // ищем пользователя
+                return list.get(i).role; // выдаем его роль
+            }
+        }
+    return 404; // если вдруг не нашли юзера выдаем ошибку - 404
+    }
+
+    private LinkedList<UsersData> getUsersList() {
         LinkedList<UsersData> list = new LinkedList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
-        if (cursor.moveToFirst()){
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
             do {
                 int pos1 = cursor.getColumnIndex(COL_1);
                 int pos2 = cursor.getColumnIndex(COL_2);
                 int pos3 = cursor.getColumnIndex(COL_3);
                 int pos4 = cursor.getColumnIndex(COL_4);
-                UsersData data = new UsersData(cursor.getInt(pos1),cursor.getString(pos2),cursor.getString(pos3), cursor.getInt(pos4));
+                UsersData data = new UsersData(cursor.getInt(pos1), cursor.getString(pos2), cursor.getString(pos3), cursor.getInt(pos4));
                 list.add(data);
             } while (cursor.moveToNext());
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).role==0) return true;
-            }
-            return false;
 
-        } else return false;
+        }
+        return list;
     }
-
-    public boolean checkUser (String t_user, String t_passw){
-        LinkedList<UsersData> list = new LinkedList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
-        if (cursor.moveToFirst()){
-            do {
-                int pos1 = cursor.getColumnIndex(COL_1);
-                int pos2 = cursor.getColumnIndex(COL_2);
-                int pos3 = cursor.getColumnIndex(COL_3);
-                int pos4 = cursor.getColumnIndex(COL_4);
-                UsersData data = new UsersData(cursor.getInt(pos1),cursor.getString(pos2),cursor.getString(pos3), cursor.getInt(pos4));
-                list.add(data);
-            } while (cursor.moveToNext());
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).name.equals(t_user)) { // ищем пользователя
-                    if (list.get(i).passw.equals(t_passw)) return true; // Проверка совпадения пароля
-                }
-            }
-
-            }
-            return false;
-
-    }
-
 }
