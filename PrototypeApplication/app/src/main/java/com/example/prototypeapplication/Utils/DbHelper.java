@@ -1,14 +1,14 @@
-package com.example.prototypeapplication;
+package com.example.prototypeapplication.Utils;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
-import androidx.annotation.ContentView;
 import androidx.annotation.Nullable;
+
+import com.example.prototypeapplication.Model.UsersData;
 
 import java.util.LinkedList;
 
@@ -51,6 +51,20 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(COL_4, role);
         long result = db.insert(TABLE_NAME, null, cv);
         return result != -1;
+    }
+
+    public void updateUser(int id, String name, String passw, int role) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, name);
+        contentValues.put(COL_3, pass); // вот тут надо приправить пароль солью и сохранить хеш
+        contentValues.put(COL_4, role);
+        db.update(TABLE_NAME, contentValues, "ID=?", new String[]{String.valueOf(id)});
+    }
+
+    public void deleteUser(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, "id=?", new String[]{String.valueOf(id)});
     }
 
     public boolean checkRoot() {
