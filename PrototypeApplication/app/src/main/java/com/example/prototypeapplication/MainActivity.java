@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.prototypeapplication.Utils.DbHelper;
-
 public class MainActivity extends AppCompatActivity {
 
     Button btn_save;

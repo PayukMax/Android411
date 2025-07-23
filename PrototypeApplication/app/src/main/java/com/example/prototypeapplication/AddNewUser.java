@@ -1,6 +1,8 @@
 package com.example.prototypeapplication;
 
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,43 +16,54 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.prototypeapplication.Utils.DbHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class AddNewUser extends BottomSheetDialogFragment {
 
-    public static final String TAG="AddNewUser";
+    public static final String TAG = "AddNewUser";
 
-    private EditText mUser, mPasw;
+    private EditText mUser, mPasw, mRole;
     private Button mSaveButton;
     private DbHelper myDB;
 
-    public static AddNewUser newInstance() {return new AddNewUser();}
+//    RadioGroup role_selector;
+//    int rg_role=0;
+
+    public static AddNewUser newInstance() {
+        return new AddNewUser();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.add_new_user, container,false);
+        View v = inflater.inflate(R.layout.add_new_user, container, false);
         return v;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mUser = view.findViewById(R.id.n_name);
         mPasw = view.findViewById(R.id.n_passw);
+        mRole = view.findViewById(R.id.n_role);
         mSaveButton = view.findViewById(R.id.btn_Save);
+//        role_selector = view.findViewById(R.id.roleSelector);
 
         myDB = new DbHelper(getActivity());
         boolean isUpdate = false;
         Bundle bundle = getArguments();
-        if (bundle!= null) {
-            isUpdate=true;
-            String t1 = bundle.getString("user");
-            String t2 = bundle.getString("passw")
-            mUser.setText(t1);
-            mPasw.setText(t2);
-            if (t1.length()>0){
+        if (bundle != null) {
+            isUpdate = true;
+            int t1 = bundle.getInt("id");
+            String t2 = bundle.getString("user");
+            String t3 = bundle.getString("passw");
+            int t4 = bundle.getInt("role");
+
+            mUser.setText(t2);
+            mPasw.setText(t3);
+            mRole.setText(String.valueOf(t4));
+            if (t2.length() > 0) {
                 mSaveButton.setEnabled(false);
             }
         }
@@ -62,14 +75,15 @@ public class AddNewUser extends BottomSheetDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")){
+                if (s.toString().equals("")) {
                     mSaveButton.setEnabled(false);
                     mSaveButton.setBackgroundColor(Color.GRAY);
                 } else {
                     mSaveButton.setEnabled(true);
-//                        mSaveButton.setBackgroundColor();
+                    mSaveButton.setBackgroundColor(Color.BLUE);
                 }
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -77,24 +91,73 @@ public class AddNewUser extends BottomSheetDialogFragment {
             }
         });
 
+        mPasw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                if (s.toString().equals("")) {
+                    mSaveButton.setEnabled(false);
+                    mSaveButton.setBackgroundColor(Color.GRAY);
+                } else {
+                    mSaveButton.setEnabled(true);
+                    mSaveButton.setBackgroundColor(Color.BLUE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+//        role_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//
+//                int selectedId = rg.getCheckedRadioButtonId();
+//                if (selectedId==R.id.rb1) {rg_role=1; mRole.setText("1");}
+//                if (selectedId==R.id.rb2) {rg_role=2; mRole.setText("2");}
+//                if (selectedId==R.id.rb3) {rg_role=3; mRole.setText("3");}
+//                if (selectedId==R.id.rb4) {rg_role=0; mRole.setText("0");}
+//
+//            }
+//        });
+
 
         boolean finalIsUpdate = isUpdate;
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = mEditText.getText().toString();
-                if (finalIsUpdate){
-                    myDB.updateTask(bundle.getInt("Id"),text);
+                String tUser = mUser.getText().toString();
+                String tPass = mPasw.getText().toString();
+                int tRole = Integer.parseInt(mRole.getText().toString());
+
+                if (finalIsUpdate) {
+                    myDB.updateUser(bundle.getInt("id"), tUser, tPass, tRole);
                 } else {
-                    ToDoModel item = new ToDoModel();
-                    item.setTask(text);
-                    item.setStatus(0);
-                    myDB.insertTask(item);
+//                    UsersData item = new UsersData();
+//                    item.setName(tUser);
+//                    item.setPassw(tPass);
+//                    item.setRole(8);
+                    myDB.addUser(tUser, tPass, tRole);
                 }
                 dismiss();
             }
         });
     }
 
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Activity activity = getActivity();
+        if (activity instanceof OnDialogCloseListener) {
+            ((OnDialogCloseListener) activity).onDialogClose(dialog);
+        }
+    }
 
 }

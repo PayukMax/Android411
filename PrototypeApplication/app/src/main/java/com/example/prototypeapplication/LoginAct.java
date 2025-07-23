@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.prototypeapplication.Utils.DbHelper;
-
 public class LoginAct extends AppCompatActivity {
 
     Button btn_login;
@@ -23,7 +21,9 @@ public class LoginAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         DbHelper dbh = new DbHelper(this);
+
         btn_login = findViewById(R.id.btn_login);
         login_name = findViewById(R.id.edit_user);
         login_passw = findViewById(R.id.edit_passw);

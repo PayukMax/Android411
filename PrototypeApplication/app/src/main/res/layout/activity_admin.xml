@@ -25,11 +25,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="100dp"
-        android:nestedScrollingEnabled="true"
+         android:nestedScrollingEnabled="true"
          />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,6 +39,10 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
         android:clickable="true"
-        app:srcCompat="@drawable/outline_add_24" />
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/outline_add_24"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"
+        />
 
 </RelativeLayout>

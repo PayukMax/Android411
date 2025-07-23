@@ -1,5 +1,6 @@
-package com.example.prototypeapplication.Utils;
+package com.example.prototypeapplication;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,9 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.prototypeapplication.UsersData;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -107,16 +108,49 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-//            do {
-//                int pos1 = cursor.getColumnIndex(COL_1);
-//                int pos2 = cursor.getColumnIndex(COL_2);
-//                int pos3 = cursor.getColumnIndex(COL_3);
-//                int pos4 = cursor.getColumnIndex(COL_4);
-////                UsersData data = new UsersData(cursor.getInt(pos1), cursor.getString(pos2), cursor.getString(pos3), cursor.getInt(pos4));
-//                list.add(data);
-//            } while (cursor.moveToNext());
+            do {
+                int pos1 = cursor.getColumnIndex(COL_1);
+                int pos2 = cursor.getColumnIndex(COL_2);
+                int pos3 = cursor.getColumnIndex(COL_3);
+                int pos4 = cursor.getColumnIndex(COL_4);
+                UsersData data = new UsersData();
+                data.setId(cursor.getInt(pos1));
+                data.setName(cursor.getString(pos2));
+                data.setPassw(cursor.getString(pos3));
+                data.setRole(cursor.getInt(pos4));
+                list.add(data);
+            } while (cursor.moveToNext());
 
         }
         return list;
+    }
+
+    @SuppressLint("Range")
+    public List<UsersData> getAllUsers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = null;
+        List<UsersData> usersList = new ArrayList<>();
+
+        db.beginTransaction();
+        try {
+            cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
+            if (cursor != null){
+                if (cursor.moveToFirst()){
+                    do {
+                        UsersData usData = new UsersData();
+                        usData.setId(cursor.getInt(cursor.getColumnIndex(COL_1)));
+                        usData.setName(cursor.getString(cursor.getColumnIndex(COL_2)));
+                        usData.setPassw(cursor.getString(cursor.getColumnIndex(COL_3)));
+                        usData.setRole(cursor.getInt(cursor.getColumnIndex(COL_4)));
+                        usersList.add(usData);
+                    } while (cursor.moveToNext());
+                }
+            }
+
+        } finally {
+            db.endTransaction();
+            cursor.close();
+        }
+        return usersList;
     }
 }

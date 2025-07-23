@@ -1,33 +1,27 @@
-package com.example.prototypeapplication.Adaptor;
+package com.example.prototypeapplication;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.prototypeapplication.AddNewUser;
-import com.example.prototypeapplication.MainActivity;
-import com.example.prototypeapplication.UsersData;
-import com.example.prototypeapplication.R;
-import com.example.prototypeapplication.DbHelper;
 
 import java.util.List;
 
 public class UsListAdaptor extends RecyclerView.Adapter<UsListAdaptor.MyViewHolder> {
 
     private List<UsersData> datList;
-    private MainActivity activity;
+    private AdminAct activity;
     private DbHelper myDB;
 
-    public UsListAdaptor(MainActivity activity, DbHelper myDB) {
-        this.activity = activity;
+    public UsListAdaptor( DbHelper myDB, AdminAct activity) {
         this.myDB = myDB;
+        this.activity = activity;
+
     }
 
     @NonNull
@@ -38,9 +32,9 @@ public class UsListAdaptor extends RecyclerView.Adapter<UsListAdaptor.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsListAdaptor.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final UsersData item = datList.get(position);
-        String tmp = item.getName()+" - "+item.getRole();
+        String tmp = item.getId()+" - "+item.getName()+" - "+item.getPassw()+" - "+item.getRole();
         holder.user_line.setText(tmp); //
     }
 
