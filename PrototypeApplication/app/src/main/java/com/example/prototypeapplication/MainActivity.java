@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_save;
     EditText name, passw;
-    RadioGroup rg;
-    RadioButton rb4;
+//    RadioGroup rg;
+//    RadioButton rb4;
 
     TextView tv;
     int role=10;
@@ -41,22 +41,22 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.editName);
         passw = findViewById(R.id.editPassw);
         btn_save = findViewById(R.id.btnSave);
-        rb4=findViewById(R.id.rb4);
-        rg = findViewById(R.id.roleSelector);
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-                int selectedId = rg.getCheckedRadioButtonId();
-                if (selectedId==R.id.rb1) role=1;
-                if (selectedId==R.id.rb2) role=2;
-                if (selectedId==R.id.rb3) role=3;
-                if (selectedId==R.id.rb4) role=0;
-
-                tv.setText(String.valueOf(role));
-
-            }
-        });
+//        rb4=findViewById(R.id.rb4);
+//        rg = findViewById(R.id.roleSelector);
+//        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//
+//                int selectedId = rg.getCheckedRadioButtonId();
+//                if (selectedId==R.id.rb1) role=1;
+//                if (selectedId==R.id.rb2) role=2;
+//                if (selectedId==R.id.rb3) role=3;
+//                if (selectedId==R.id.rb4) role=0;
+//
+//                tv.setText(String.valueOf(role));
+//
+//            }
+//        });
 
 
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Поля должны быть заполнены!!!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Сохраняем в базу учетку с ролью 0
-                    boolean result = dbh.addUser(name.getText().toString(),passw.getText().toString(),role);
+                    boolean result = dbh.addUser(name.getText().toString(),passw.getText().toString(),0);
                     if (result) {Toast.makeText(MainActivity.this, "Пользователь добавлен!!!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, LoginAct.class);
                     startActivity(intent);} else

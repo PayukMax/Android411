@@ -93,6 +93,17 @@ public class DbHelper extends SQLiteOpenHelper {
             return false;
     }
 
+    public boolean checkUserName(String t_user) {
+        LinkedList<UsersData> list = getUsersList();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().equals(t_user)) return true;
+        }
+
+//            }
+        return false;
+    }
+
     public int getRole(String t_user) {
         LinkedList<UsersData> list = getUsersList();
         for (int i = 0; i < list.size(); i++) {

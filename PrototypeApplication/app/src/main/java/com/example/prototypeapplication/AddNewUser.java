@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -114,18 +115,6 @@ public class AddNewUser extends BottomSheetDialogFragment {
 
             }
         });
-//        role_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//
-//                int selectedId = rg.getCheckedRadioButtonId();
-//                if (selectedId==R.id.rb1) {rg_role=1; mRole.setText("1");}
-//                if (selectedId==R.id.rb2) {rg_role=2; mRole.setText("2");}
-//                if (selectedId==R.id.rb3) {rg_role=3; mRole.setText("3");}
-//                if (selectedId==R.id.rb4) {rg_role=0; mRole.setText("0");}
-//
-//            }
-//        });
 
 
         boolean finalIsUpdate = isUpdate;
@@ -139,11 +128,11 @@ public class AddNewUser extends BottomSheetDialogFragment {
                 if (finalIsUpdate) {
                     myDB.updateUser(bundle.getInt("id"), tUser, tPass, tRole);
                 } else {
-//                    UsersData item = new UsersData();
-//                    item.setName(tUser);
-//                    item.setPassw(tPass);
-//                    item.setRole(8);
-                    myDB.addUser(tUser, tPass, tRole);
+                    if (myDB.checkUserName(tUser)) {
+                        Toast.makeText(getContext(), "Такой пользователь уже существует. Укажите другое имя...", Toast.LENGTH_SHORT).show();
+                    } else {
+                        myDB.addUser(tUser, tPass, tRole);
+                    }
                 }
                 dismiss();
             }

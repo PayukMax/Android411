@@ -50,6 +50,18 @@ public class LoginAct extends AppCompatActivity {
                             startActivity(intent);
                             dbh.close();
                         }
+                        if (dbh.getRole(login_name.getText().toString())==2){
+                            login_passw.setText("");
+                            Intent intent = new Intent(LoginAct.this, Role2Act.class);
+                            startActivity(intent);
+                            dbh.close();
+                        }
+                        if (dbh.getRole(login_name.getText().toString())==3){
+                            login_passw.setText("");
+                            Intent intent = new Intent(LoginAct.this, Role3Act.class);
+                            startActivity(intent);
+                            dbh.close();
+                        }
                     } else {
                         Toast.makeText(LoginAct.this, "Ошибка в имени пользоватея или пароле....", Toast.LENGTH_SHORT).show();
                     }

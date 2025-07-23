@@ -21,22 +21,24 @@
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:inputType="text"
         android:hint="Имя"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/editPassw"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:inputType="textPassword"
         android:hint="Пароль"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
@@ -52,41 +54,41 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roleSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/editPassw" />
 
-    <RadioGroup
-        android:id="@+id/roleSelector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassw">
+<!--    <RadioGroup-->
+<!--        android:id="@+id/roleSelector"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editPassw">-->
 
-        <RadioButton
-            android:id="@+id/rb1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Роль №1" />
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Роль №1" />-->
 
-        <RadioButton
-            android:id="@+id/rb2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Роль №2" />
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Роль №2" />-->
 
-        <RadioButton
-            android:id="@+id/rb3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Роль №3" />
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Роль №3" />-->
 
-        <RadioButton
-            android:id="@+id/rb4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Роль №4" />
-    </RadioGroup>
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb4"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Роль №4" />-->
+<!--    </RadioGroup>-->
 
     <TextView
         android:id="@+id/testText"
